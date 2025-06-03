@@ -42,6 +42,7 @@ main {
   position: relative;
   white-space: nowrap;
   box-shadow: 0 5px 10px #000;
+  overflow: hidden;
 }
 
 .nubes-morioh {
@@ -297,6 +298,14 @@ h1 {
 
 @media (max-width: 768px) {
 
+  main {
+    min-height: 100vh;
+  }
+
+ /* .nubes-morioh {
+    display: none;
+  }
+ */
   .heading {
     height: 150px;
   }
