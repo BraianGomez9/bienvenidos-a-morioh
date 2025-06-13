@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Diamond is unbreakable #1",
+    "price": 12000,
+    "image": "../img/productos/merch1.webp",
+    "alt": "Portada del manga Diamond is unbreakable número 1"
+  },
+  {
+    "id": 2,
+    "name": "Kishibe Rohan Plushie",
+    "price": 15000,
+    "image": "../img/productos/merch2.jpg",
+    "alt": "Muñeco de peluche de Kishibe Rohan"
+  },
+  {
+    "id": 3,
+    "name": "Bufanda de Joseph",
+    "price": 8000,
+    "image": "../img/productos/merch3.jpg",
+    "alt": "Bufanda inspirada en Joseph Joestar"
+  },
+  {
+    "id": 4,
+    "name": "Flecha Stand Replica",
+    "price": 10000,
+    "image": "../img/productos/merch4.jpg",
+    "alt": "Replica de la flecha Stand"
+  },
+  {
+    "id": 5,
+    "name": "Gorra de Jotaro SC",
+    "price": 7000,
+    "image": "../img/productos/merch5.jpeg",
+    "alt": "Gorra de Jotaro Kujo"
+  },
+  {
+    "id": 6,
+    "name": "Jojos All Stars R (ps4)",
+    "price": 28000,
+    "image": "../img/productos/merch6.jpg",
+    "alt": "Juego Jojo's All Stars R para PS4"
+  },
+  {
+    "id": 7,
+    "name": "Steel Ball Run #1",
+    "price": 12000,
+    "image": "../img/productos/merch7.webp",
+    "alt": "Portada del manga Steel Ball Run número 1"
+  },
+  {
+    "id": 8,
+    "name": "Figura Giornio Giovanna",
+    "price": 30000,
+    "image": "../img/productos/merch8.jpg",
+    "alt": "Figura coleccionable de Giorno Giovanna"
+  },
+  {
+    "id": 9,
+    "name": "Baoh el visitante Tomo unico",
+    "price": 12000,
+    "image": "../img/productos/merch9.jpg",
+    "alt": "Portada del tomo único Baoh el visitante"
+  }
+]

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/tienda.css">
+    <link rel="stylesheet" href="/css/carrito.css">
     <title>Document</title>
 </head>
 
@@ -31,22 +31,17 @@
             <a href="categorias.html">Categorías</a>
             <a href="contacto.html">Contacto</a>
             <a href="tienda.html">Tienda</a>
-            <a href="carrito.html">Carrito</a>
+            <a href="carrito.html"></a>
         </nav>
     </header>
-    <main>
-        <div class="products-container" id="products-container">
-
-        </div>
-    </main>
-    <footer>
-        <div class="footer-data">
-            <a href="../index.html">Inicio</a>
-            <a href="categorias.html">Categorías</a>
-            <a href="contacto.html">Contacto</a>
-        </div>
-        <p>2025 Morioh Town. Todos los derechos reservados.</p>
-    </footer>
+    <div id="cart-container">
+    <h2>Carrito de Compras</h2>
+    <div id="cart-items"></div> 
+    <div id="cart-total">Total: $0</div>
+    <button id="remove-all">Vaciar Carrito</button>
+    
+</div>
+    
     <script src="/js/cart.js"></script>
 </body>
 
