@@ -3,6 +3,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
+
 }
 
 
@@ -151,6 +152,7 @@ main {
     justify-content: center;
     min-height: 100vh;
     display: flex;
+    position: relative;
 }
 
 
@@ -167,6 +169,28 @@ main {
     border-radius: 1rem;
     background: linear-gradient(135deg, #FFD700, #FFFACD, #DAA520);
     border: #833bff 5px solid;
+    position: relative;
+}
+
+#cart-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+#cart-message.visible {
+    display: block;
+    opacity: 1;
 }
 
 .product {
@@ -230,9 +254,9 @@ main {
 
 
 
-.add-to-cart:hover{
-   background-color: #833bff;
-   border: #DAA520 1px solid;
+.add-to-cart:hover {
+    background-color: #833bff;
+    border: #DAA520 1px solid;
 }
 
 .footer-data {

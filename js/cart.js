@@ -96,22 +96,34 @@ if (productsContainer) {
                 </div>`
             })
             productsContainer.innerHTML = html;
-            const buttons = document.querySelectorAll(".add-to-cart")
+            const buttons = document.querySelectorAll(".add-to-cart");
             buttons.forEach((el) => {
                 el.addEventListener("click", () => {
                     const idFinded = parseInt(el.dataset.id);
                     let getProduct = data.find(product => product.id === idFinded);
                     let productInCart = carrito.find(prod => prod.id === idFinded);
+                    const message = document.getElementById("cart-message");
 
                     if (productInCart) {
-                        productInCart.cantidad += 1
+                        productInCart.cantidad += 1;
                     } else {
-                        carrito.push({ ...getProduct, cantidad: 1 })
+                        carrito.push({ ...getProduct, cantidad: 1 });
                     }
                     localStorage.setItem("carrito", JSON.stringify(carrito));
-                    console.log(carrito)
+
+                    // Mostrar el mensaje agregando la clase visible
+                    message.innerText = "Añadido al carrito!";
+                    message.classList.add("visible");
+
+                    // Después de 3 segundos quitar la clase para ocultar el mensaje
+                    setTimeout(() => {
+                        message.classList.remove("visible");
+                    }, 3000);
+
+                    console.log(carrito);
                 });
             });
+
         })
         .catch(error => {
             console.error('Error en la comunicación con la API:', error);
