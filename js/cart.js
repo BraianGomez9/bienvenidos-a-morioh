@@ -1,7 +1,21 @@
+// Detecta basePath según entorno (localhost o GitHub Pages)
+const isLocalhost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+
+// Ruta base para recursos (imágenes, JSON) según entorno y carpeta donde está la página
+// Aquí asumimos que el JS se ejecuta desde /pages/ (tienda.html o carrito.html)
+const baseRepoPath = isLocalhost ? "../" : "/bienvenidos-a-morioh/";
+
+// Función para ajustar rutas de imágenes (producto.image)
+function fixImagePath(imagePath) {
+  // Si la ruta ya es absoluta (http o /), no tocarla
+  if (imagePath.startsWith("http") || imagePath.startsWith("/")) return imagePath;
+  // Si no, agregar la base para imagenes en carpeta img/
+  return baseRepoPath + "img/" + imagePath;
+}
+
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 const carritoGuardado = localStorage.getItem("carrito");
 carrito = carritoGuardado ? JSON.parse(carritoGuardado) : [];
-
 
 const renderCart = () => {
   let cartItems = document.getElementById("cart-items");
@@ -18,7 +32,7 @@ const renderCart = () => {
     total += itemTotal;
 
     itemhtml += `<div class="cart-item">
-        <img src="${item.image}" alt="${item.alt}">
+        <img src="${fixImagePath(item.image)}" alt="${item.alt}">
         <p><strong>${item.name}</strong></p>
         <p>Precio: $${item.price} x ${item.cantidad}</p>
         <button class="remove-cart-item" data-id="${item.id}">-</button>
@@ -33,7 +47,7 @@ const renderCart = () => {
   cartItems.innerHTML = itemhtml;
   cartTotal.innerText = `Total: $${total}`;
 
-
+  // Botones eliminar item
   let removeItem = document.querySelectorAll(".remove-item");
   removeItem.forEach((button) => {
     button.addEventListener("click", () => {
@@ -44,7 +58,7 @@ const renderCart = () => {
     });
   });
 
-
+  // Botones aumentar cantidad
   let addItem = document.getElementsByClassName("add-cart-item");
   Array.from(addItem).forEach((button) => {
     button.addEventListener("click", () => {
@@ -58,7 +72,7 @@ const renderCart = () => {
     });
   });
 
-
+  // Botones disminuir cantidad
   let decrementItem = document.getElementsByClassName("remove-cart-item");
   Array.from(decrementItem).forEach((button) => {
     button.addEventListener("click", () => {
@@ -77,11 +91,11 @@ const renderCart = () => {
   });
 };
 
-
 let productsContainer = document.getElementById("products-container");
 
-let basePath = location.hostname === "localhost"
-  ? "../../data/products.json"
+// Ruta para el JSON de productos
+let basePath = isLocalhost
+  ? "../../data/products.json" // localhost, considerando que JS está en /pages/js/
   : "https://braiangomez9.github.io/bienvenidos-a-morioh/data/products.json";
 
 if (productsContainer) {
@@ -93,6 +107,11 @@ if (productsContainer) {
       return response.json();
     })
     .then(data => {
+      // Ajustar rutas de imágenes para productos
+      data.forEach(product => {
+        product.image = fixImagePath(product.image);
+      });
+
       let html = "";
       data.forEach(product => {
         html += `
@@ -111,6 +130,7 @@ if (productsContainer) {
       });
       productsContainer.innerHTML = html;
 
+      // Agregar eventos a botones agregar al carrito
       const buttons = document.querySelectorAll(".add-to-cart");
       buttons.forEach(el => {
         el.addEventListener("click", () => {
@@ -136,6 +156,7 @@ if (productsContainer) {
             }, 3000);
           }
 
+          renderCart(); // Actualizar carrito en pantalla (por si está visible)
           console.log(carrito);
         });
       });
@@ -145,7 +166,7 @@ if (productsContainer) {
     });
 }
 
-
+// Vaciar carrito completo
 const cleanAllCart = document.getElementById("remove-all");
 if (cleanAllCart) {
   cleanAllCart.addEventListener("click", () => {
@@ -154,6 +175,5 @@ if (cleanAllCart) {
     renderCart();
   });
 }
-
 
 renderCart();
