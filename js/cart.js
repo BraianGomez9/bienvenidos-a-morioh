@@ -35,8 +35,10 @@ const renderCart = () => {
         <img src="${fixImagePath(item.image)}" alt="${item.alt}">
         <p><strong>${item.name}</strong></p>
         <p>Precio: $${item.price} x ${item.cantidad}</p>
+        <div class="add-remove-cart">
         <button class="remove-cart-item" data-id="${item.id}">-</button>
         <button class="add-cart-item" data-id="${item.id}">+</button>
+        </div>
         <p>Subtotal: $${itemTotal}</p>
         <div class="add-item-cart">
           <button class="remove-item" data-id="${item.id}">Eliminar</button>
@@ -47,7 +49,7 @@ const renderCart = () => {
   cartItems.innerHTML = itemhtml;
   cartTotal.innerText = `Total: $${total}`;
 
-  // Botones eliminar item
+
   let removeItem = document.querySelectorAll(".remove-item");
   removeItem.forEach((button) => {
     button.addEventListener("click", () => {
@@ -58,9 +60,9 @@ const renderCart = () => {
     });
   });
 
-  // Botones aumentar cantidad
-  let addItem = document.getElementsByClassName("add-cart-item");
-  Array.from(addItem).forEach((button) => {
+
+  let increaseItem = document.getElementsByClassName("add-cart-item");
+  Array.from(increaseItem).forEach((button) => {
     button.addEventListener("click", () => {
       const increaseItem = parseInt(button.dataset.id);
       let product = carrito.find((item) => item.id === increaseItem);
@@ -73,8 +75,8 @@ const renderCart = () => {
   });
 
   // Botones disminuir cantidad
-  let decrementItem = document.getElementsByClassName("remove-cart-item");
-  Array.from(decrementItem).forEach((button) => {
+  let discreaseItem = document.getElementsByClassName("remove-cart-item");
+  Array.from(discreaseItem).forEach((button) => {
     button.addEventListener("click", () => {
       const decreaseItem = parseInt(button.dataset.id);
       let product = carrito.find(item => item.id === decreaseItem);
@@ -130,7 +132,7 @@ if (productsContainer) {
       });
       productsContainer.innerHTML = html;
 
-      // Agregar eventos a botones agregar al carrito
+
       const buttons = document.querySelectorAll(".add-to-cart");
       buttons.forEach(el => {
         el.addEventListener("click", () => {
@@ -156,7 +158,7 @@ if (productsContainer) {
             }, 3000);
           }
 
-          renderCart(); // Actualizar carrito en pantalla (por si está visible)
+          updateCart();
           console.log(carrito);
         });
       });
@@ -176,4 +178,108 @@ if (cleanAllCart) {
   });
 }
 
-renderCart();
+const modalView = document.getElementById("cart-modal");
+const closeButton = document.getElementById("close-modal");
+const cartModal = document.getElementById("carrito-logo");
+
+function toggleModal() {
+  modalView.classList.toggle("hidden");
+}
+
+if (cartModal) {
+  cartModal.addEventListener("click", toggleModal);
+}
+
+if (closeButton) {
+  closeButton.addEventListener("click", toggleModal);
+}
+
+function renderModalCart() {
+  let cartModalItems = document.getElementById("cart-modal-items")
+  let cartModalTotal = document.getElementById("cart-modal-total")
+
+  cartModalItems.innerHTML = ""
+  let total = 0
+  let itemhtml = "";
+
+  carrito.forEach((item) => {
+    const itemTotal = item.price * item.cantidad;
+    total += itemTotal;
+    itemhtml += `<div class="cart-item">
+        <img src="${fixImagePath(item.image)}" alt="${item.alt}">
+        <p><strong>${item.name}</strong></p>
+        <p>Precio: $${item.price} x ${item.cantidad}</p>
+        <div class="add-remove-cart">
+        <button class="remove-cart-item" data-id="${item.id}">-</button>
+        <button class="add-cart-item" data-id="${item.id}">+</button>
+        </div>
+        <p>Subtotal: $${itemTotal}</p>
+        <div class="add-item-cart">
+          <button class="remove-item" data-id="${item.id}">Eliminar</button>
+        </div>
+      </div>`;
+  })
+  cartModalItems.innerHTML = itemhtml;
+  cartModalTotal.innerText = `Total: $${total}`;
+
+  let removeItem = document.querySelectorAll(".remove-item");
+  removeItem.forEach((button) => {
+    button.addEventListener("click", () => {
+      const deleteItem = parseInt(button.dataset.id);
+      carrito = carrito.filter((item) => item.id !== deleteItem);
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      updateCart();
+    });
+  });
+
+
+  let increaseItem = document.getElementsByClassName("add-cart-item");
+  Array.from(increaseItem).forEach((button) => {
+    button.addEventListener("click", () => {
+      const increaseItem = parseInt(button.dataset.id);
+      let product = carrito.find((item) => item.id === increaseItem);
+      if (product) {
+        product.cantidad += 1;
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        updateCart();
+      }
+    });
+  });
+
+  // Botones disminuir cantidad
+  let discreaseItem = document.getElementsByClassName("remove-cart-item");
+  Array.from(discreaseItem).forEach((button) => {
+    button.addEventListener("click", () => {
+      const decreaseItem = parseInt(button.dataset.id);
+      let product = carrito.find(item => item.id === decreaseItem);
+      if (product) {
+        if (product.cantidad > 1) {
+          product.cantidad -= 1;
+        } else {
+          carrito = carrito.filter(item => item.id !== decreaseItem);
+        }
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+        updateCart();
+      }
+    });
+  });
+}
+
+
+function updateCartBadge() {
+  const total = carrito.reduce((acc, prod) => acc + prod.cantidad, 0)
+  const badge = document.getElementById("cart-badge")
+  if (badge) {
+    badge.innerText = total > 4 ? "+4" : total
+    badge.style.visibility = "visible"
+  }
+}
+
+
+function updateCart() {
+  renderCart();
+  renderModalCart();
+  updateCartBadge();
+}
+
+updateCart();

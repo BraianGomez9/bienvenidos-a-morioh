@@ -259,6 +259,181 @@ main {
     border: #DAA520 1px solid;
 }
 
+
+/* Fondo oscuro del modal */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 40%;
+    left: 60%;
+    width: 500px;
+    max-height: 400px;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    z-index: 500;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+/* Botón para cerrar */
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #444;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Oculto por defecto */
+.hidden {
+    display: none;
+}
+
+/* Estilo de los ítems del carrito en el modal */
+.modal .cart-item {
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.modal .cart-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.modal .cart-item button {
+    margin-left: 0.5rem;
+    padding: 0.3rem 0.6rem;
+    background-color: #c70039;
+    color: #fff;
+    border: none;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.modal .cart-item button:hover {
+    background-color: #900c27;
+}
+
+.carrito-logo-container {
+    position: relative;
+    position: fixed;
+    top: 85%;
+    left: 89%;
+}
+
+.carrito-logo-container span {
+    position: absolute;
+    left: -10px;
+    top: -10px;
+    font-size: 30px;
+    color: white;
+    background-color: #c70039;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.carrito-logo {
+    width: 100px;
+    height: 100px;
+
+}
+
+#cart-modal-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+#cart-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #5e4092;
+    min-height: 100vh;
+}
+
+#cart-items {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.cart-item {
+    width: 90%;
+    background: linear-gradient(135deg, #FFD700, #FFFACD, #DAA520);
+    border: #833bff 5px solid;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-item img {
+    width: 100px;
+    border-radius: 1rem;
+    border: 2px solid #5e4092;
+}
+
+
+.cart-item p {
+    font-size: 12px;
+}
+
+.add-remove-cart {
+    display: flex;
+    gap: 10px;
+}
+
+.remove-cart-item {
+    background-color: #9664a7;
+    color: white;
+    border: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.add-cart-item {
+    background-color: #9664a7;
+    color: white;
+    border: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
 .footer-data {
     display: flex;
     gap: 10px;
